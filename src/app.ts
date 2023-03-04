@@ -6,6 +6,10 @@ import "express-async-errors";
 const app = express();
 app.use(express.json());
 // All code should go below this line
+app.get("/dogs", async (req, res) => {
+  const dogs = await prisma.dog.findMany();
+  return res.status(200).send(dogs);
+});
 
 // all your code should go above this line
 app.use(errorHandleMiddleware);
