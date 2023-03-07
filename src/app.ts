@@ -2,8 +2,11 @@ import express from "express";
 import { prisma } from "../prisma/prisma-instance";
 import { errorHandleMiddleware } from "./error-handler";
 import "express-async-errors";
-//import { validateRequest } from "zod-express-middleware";
 import { z } from "zod";
+
+const app = express();
+app.use(express.json());
+// All code should go below this line
 
 const idSchema = z
   .string()
@@ -35,9 +38,6 @@ const bodySchemaFull = z
   })
   .strict();
 
-const app = express();
-app.use(express.json());
-// All code should go below this line
 app.get("/", (_req, res) => {
   res.json({ message: "Hello World!" }).status(200); // the 'status' is unnecessary but wanted to show you how to define a status
 });
